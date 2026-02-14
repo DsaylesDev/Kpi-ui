@@ -1,77 +1,62 @@
-<<<<<<< HEAD
-# Kpi-ui
-=======
-# React + TypeScript + Vite
+# KPI Dashboard UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A definition-driven KPI dashboard UI built with **React, TypeScript, Vite, and Recharts**, inspired by enterprise analytics tools (e.g. Power BI–style layouts).
 
-Currently, two official plugins are available:
+This project is designed to consume **multiple backend services** through a common KPI contract, making it easy to visualize operational metrics such as event breakdowns, rates, time-based counts, and leaderboards.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 📊 Definition-driven KPI registry (add KPIs without rewriting UI logic)
+- 🧩 Supports multiple KPI types:
+  - Donut charts
+  - Bar / time-series charts
+  - Numeric KPIs (rates, totals)
+  - Leaderboards
+- 🎛 Power BI–style dashboard layout (cards + grid + filters)
+- 🔌 Backend-agnostic (works with multiple Spring Boot services)
+- ⚡ Fast local dev with Vite
+- 🧪 Easy to extend with mock data or new services
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React 18**
+- **TypeScript**
+- **Vite**
+- **Recharts**
+- **Material UI (MUI)** for layout and theming
+- **Fetch API** for backend integration
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Project Structure
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
->>>>>>> 087d223 (Intial KPI UI with Recharts explorer)
+## Supported Backend Endpoints
+
+This UI currently supports the following KPI endpoints:
+
+| Endpoint | Visualization |
+|--------|---------------|
+| `/kpis/event-type-breakdown` | Donut |
+| `/kpis/events-per-hour` | Bar / Time Series |
+| `/kpis/success-rate` | Numeric KPI |
+| `/kpis/leaderboard/top-actors` | Leaderboard |
+
+Each KPI is registered in `definitions.ts` and rendered dynamically.
+
+---
+
+## Local Development
+
+### 1. Install dependencies
+```bash
+npm install
+VITE_KPI_API_BASE_URL=http://localhost:8080
+npm run dev
+http://localhost:5173
